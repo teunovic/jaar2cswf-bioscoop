@@ -56,32 +56,17 @@ const ShowSchema = new Schema({
     },
     start: {
         type: Date,
-        required: true,
-        validate: [
-            //TODO: fix this
-            value => new Promise((res, rej) => Show.find({})),
-            ''
-        ]
+        required: true
+    },
+    end: {
+        type: Date,
+        required: true
     }
 });
+
 
 const Movie = mongoose.model('Movie', MovieSchema);
 const Room = mongoose.model('Room', RoomSchema);
 const Show = mongoose.model('Show', ShowSchema);
-
-ShowSchema.path('movie').validate(function (value) {
-    return new Promise((res, rej) => Movie.findOne({_id: value})
-        .then(movie => movie ? res(movie) : rej())
-        .catch(err => rej(err))
-    );
-}, 'Movie does not exist');
-
-ShowSchema.path('room').validate(function (value) {
-    return new Promise((res, rej) => Room.findOne({_id: value})
-            .then(room => room ? res(room) : rej())
-            .catch(err => rej(err))
-    );
-}, 'Room does not exist');
-
 
 module.exports = {Movie, Room, Show};

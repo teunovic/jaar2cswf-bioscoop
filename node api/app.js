@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/routes');
 const app = express();
 
-
 mongoose.Promise = global.Promise;
 
 mongoose.set('useCreateIndex', true);
