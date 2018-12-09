@@ -6,7 +6,7 @@ let users = require('../models/users');
 let jwt = require('../util/jwt');
 
 
-router.get('/login', function(req, res) {
+router.post('/login', function(req, res) {
     let username = String(req.body.username) || '';
     let password = String(req.body.password) || '';
 
