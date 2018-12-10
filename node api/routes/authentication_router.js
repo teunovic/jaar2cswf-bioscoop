@@ -7,16 +7,25 @@ let jwt = require('../util/jwt');
 
 
 router.post('/login', function(req, res) {
-    let username = String(req.body.username) || '';
-    let password = String(req.body.password) || '';
+    let username = req.body.username;
+    let password = req.body.password;
+
+    console.log('logging in with ' + username);
 
     users.User.findOne({username: username, password: password})
         .then(user => {
-            if(!user) {
+            console.log(user);
+            if (!user) {
                 res.status(403).json(new ErrorResponse(1, "Incorrect username or password"));
                 return;
             }
-            res.json({ token: jwt.encode(user._id) });
+
+            res.json({
+                _id: user._id,
+                username: user.username,
+                isAdmin: user.isAdmin,
+                token: jwt.encode(user._id)
+            });
         })
         .catch(err => {
             res.status(409).json(new ErrorResponse(-1, err.message));
@@ -32,26 +41,19 @@ router.post('/register', function(req, res) {
         return;
     }
 
-    bcrypt.hash(password, 10, function(err, hash) {
-        if(err) {
-            console.error(err);
-            res.status(503).json(new ErrorResponse(-1, 'Something unexpected went wrong'));
-            return;
-        }
-        users.User.create({username: username, hashed_password: hash})
-            .then(user => {
-                console.log(user);
-                res.json({token: jwt.encode(user._id)});
-            })
-            .catch(err => {
-                console.log(err);
-                if(err.code === 11000) {
-                    res.status(409).json(new ErrorResponse(2, 'Username is already taken'));
-                    return;
-                }
-                res.status(409).json(new ErrorResponse(1, err.message));
-            })
-    });
+    users.User.create({username: username, password: password})
+        .then(user => {
+            console.log(user);
+            res.json({token: jwt.encode(user._id)});
+        })
+        .catch(err => {
+            console.log(err);
+            if(err.code === 11000) {
+                res.status(409).json(new ErrorResponse(2, 'Username is already taken'));
+                return;
+            }
+            res.status(409).json(new ErrorResponse(1, err.message));
+        })
 });
 
 

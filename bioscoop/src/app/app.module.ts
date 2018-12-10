@@ -1,18 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
+import {NeedAuthGuard} from './authentication/auth.guard';
+import {AuthenticationModule} from './authentication/authentication.module';
+import {NavbarComponent} from './navbar/navbar.component';
+import {MoviesModule} from './movies/movies.module';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    AuthenticationModule,
+    MoviesModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    NeedAuthGuard
+  ],
+  bootstrap: [AppComponent],
+  exports: [
+
+  ]
 })
-export class AppModule { }
+export class AppModule {
+}

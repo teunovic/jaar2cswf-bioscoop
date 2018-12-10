@@ -1,8 +1,11 @@
 let express = require('express');
 let mongoose = require('mongoose');
+let cors = require('cors');
 const bodyParser = require('body-parser');
 const routes = require('./routes/routes');
 const app = express();
+
+app.use(cors());
 
 mongoose.Promise = global.Promise;
 

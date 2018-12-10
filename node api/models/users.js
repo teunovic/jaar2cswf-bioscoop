@@ -9,9 +9,11 @@ const UserSchema = new Schema({
         maxlength: 32,
         unique: true,
     },
-    hashed_password: {
+    password: {
         type: String,
         required: [true, 'Password must be provided'],
+        minlength: 2,
+        maxlength: 64,
     },
     isAdmin: {
         type: Boolean,
@@ -20,10 +22,5 @@ const UserSchema = new Schema({
 });
 
 const User = mongoose.model('User', UserSchema);
-
-UserSchema.virtual('password')
-    .get(function() {
-        return 'password';
-    });
 
 module.exports = {User};

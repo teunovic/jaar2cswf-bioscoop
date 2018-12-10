@@ -45,7 +45,7 @@ router.get('/:id', function(req, res) {
     res.status(200).json(res.locals.room);
 });
 
-router.all('/', function(req, res, next) {
+router.all('*', function(req, res, next) {
     // admin check for all endpoints below; POST/PUT/DELETE
     if(!res.locals.user.isAdmin) {
         res.status(403).json(new ErrorResponse(1, 'No authorisation'));

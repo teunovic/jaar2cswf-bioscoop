@@ -1,0 +1,54 @@
+<h2>Movie details</h2>
+
+<ng-template #content let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modals.dismissAll()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{movie.title}}?<br />
+        This cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modals.dismissAll()">Close</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">I'm sure, delete</button>
+      </div>
+  </div>
+</ng-template>
+
+<button data-toggle="modal" (click)="openDeleteDialog(content)" data-target="#exampleModal" style="float: right;margin-top:-45px" type="button" class="btn btn-danger">Remove this movie</button>
+
+<div *ngIf="movie">
+  <form>
+    <div class="form-group">
+      <label for="id">Id</label>
+      <input id="id" disabled="disabled" routerLink="" class="form-control" value="{{movie.id}}">
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" disabled="disabled" class="form-control" value="{{movie.title}}">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" disabled="disabled" class="form-control">{{movie.description}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="releaseDate">Release date</label>
+      <input id="releaseDate" disabled="disabled" class="form-control" value="{{movie.releaseDate | date:'y-LL-dd HH:mm:ss z'}}">
+    </div>
+
+    <div class="form-group">
+      <label for="minutes">Length in minutes</label>
+      <input id="minutes" disabled="disabled" type="number"  class="form-control" value="{{movie.minutes}}">
+    </div>
+
+    <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
+    <button style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
+  </form>
+</div>
