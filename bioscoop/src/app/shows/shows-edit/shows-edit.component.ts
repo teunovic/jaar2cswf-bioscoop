@@ -4,6 +4,9 @@ import {ShowsService} from '../../services/shows.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Movie} from '../../model/Movie';
 import {Room} from '../../model/Room';
+import {MoviesService} from '../../services/movies.service';
+import {RoomsService} from '../../services/rooms.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-shows-edit',
@@ -12,38 +15,69 @@ import {Room} from '../../model/Room';
 })
 export class ShowsEditComponent implements OnInit {
 
-  public show: Show;
-  public movies: Movie[];
-  public rooms: Room[];
+  public show$: Promise<Show>;
+  public movies$: Promise<Movie[]>;
+  public rooms$: Promise<Room[]>;
+  show: Show;
 
-  responseError: string;
+  selectedMovies: Movie[];
+  selectedRooms: Room[];
 
-  constructor(private route: ActivatedRoute, private router: Router, private showsService: ShowsService) {
+  startDateField: string;
+  startDateVal: Date;
+  endDate: Date;
+
+  error: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private showsService: ShowsService, private moviesService: MoviesService, private roomsService: RoomsService) {
   }
 
-  ngOnInit() {
-    this.route.params
-      .subscribe(next => {
-          this.showsService.fetchById(next.id)
-            .then(show => {
-              this.show = show;
-            })
-            .catch(e => {
-              console.error(e);
-            });
-        },
-        err => console.error(err));
+  async ngOnInit() {
+    let params = await<any> this.route.params;
+    this.show$ = this.showsService.fetchById(params.getValue().id);
+    this.movies$ = this.moviesService.fetchAll();
+    this.rooms$ = this.roomsService.fetchAll();
+    this.show$.then(s => {
+      this.show = s;
+      this.startDateVal = s.start;
+      this.startDateField = s.start.toString();
+      this.endDate = s.end;
+      this.movies$.then(ms => this.selectedMovies = ms.filter(m => m.id === s.movie.id));
+      this.rooms$.then(rs => this.selectedRooms = rs.filter(r => r.id === s.room.id));
+    });
+  }
+
+  onChangeStartDate(val) {
+    let chosenStart = moment(val.target.value);
+    if (chosenStart.isValid()) {
+      this.startDateVal = chosenStart.toDate();
+      let end = chosenStart.add(this.show.movie.minutes, 'm');
+      this.endDate = end.toDate();
+    } else {
+      this.startDateVal = null;
+      this.endDate = null;
+    }
   }
 
   edit() {
-    /*this.showsService.edit(this.show.id, this.name)
-      .then(() => {
-        this.router.navigateByUrl('shows/' + this.show.id);
-      })
-      .catch(e => {
-        this.responseError = e.error.message;
-        console.error(e);
-      });*/
+    if (!this.selectedMovies.length) {
+      this.error = 'No movie was selected';
+      return;
+    }
+    if (!this.selectedRooms.length) {
+      this.error = 'No room was selected';
+      return;
+    }
+    if (!this.startDateVal) {
+      this.error = 'Invalid start date';
+      return;
+    }
+    this.showsService.edit(this.show.id, this.selectedMovies[0].id, this.selectedRooms[0].id, this.startDateVal)
+      .then(() => this.router.navigateByUrl('/shows/' + this.show.id))
+      .catch(err => {
+        console.error(err);
+        this.error = err.error.message;
+      });
   }
 
 }

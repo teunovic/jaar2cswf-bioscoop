@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "login-tutorial": {
+    "bioscoop": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/ngx-select-dropdown/dist/assets/style.css"
             ],
             "scripts": []
           },
@@ -50,18 +51,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "login-tutorial:build"
+            "browserTarget": "bioscoop:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "login-tutorial:build:production"
+              "browserTarget": "bioscoop:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "login-tutorial:build"
+            "browserTarget": "bioscoop:build"
           }
         },
         "test": {
@@ -95,7 +96,7 @@
         }
       }
     },
-    "login-tutorial-e2e": {
+    "bioscoop-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +104,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "login-tutorial:serve"
+            "devServerTarget": "bioscoop:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "login-tutorial:serve:production"
+              "devServerTarget": "bioscoop:serve:production"
             }
           }
         },

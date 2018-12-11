@@ -16,11 +16,15 @@ export class MoviesService {
     console.log('token = ' + this.userService.getUser().token);
   }
 
+  createMovie(obj: any) {
+    return new Movie(obj._id, obj.title, obj.description, obj.releaseDate, obj.minutes);
+  }
+
   fetchAll(): Promise<Movie[]> {
     return new Promise<Movie[]>((resolve, reject) => {
       this.http.get<any>(environment.apiUrl + '/movies', {headers: this.headers})
         .toPromise()
-        .then(results => resolve(results.map(movie => new Movie(movie._id, movie.title, movie.description, movie.releaseDate, movie.minutes))))
+        .then(results => resolve(results.map(movie => this.createMovie(movie))))
         .catch(e => reject(e));
     });
   }
@@ -29,12 +33,12 @@ export class MoviesService {
     return new Promise<Movie>((resolve, reject) => {
       this.http.get<any>(environment.apiUrl + '/movies/' + id, {headers: this.headers})
         .toPromise()
-        .then(result => resolve(new Movie(result._id, result.title, result.description, result.releaseDate, result.minutes)))
+        .then(result => resolve(this.createMovie(result)))
         .catch(e => reject(e));
     });
   }
 
-  edit(id: string, title: string, description: string, releaseDate: string, minutes: number): Promise<any> {
+  edit(id: string, title: string, description: string, releaseDate: Date, minutes: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.http.put<any>(environment.apiUrl + '/movies/' + id, {
         title: title,
@@ -50,7 +54,7 @@ export class MoviesService {
     });
   }
 
-  create(title: string, description: string, releaseDate: string, minutes: number): Promise<Movie> {
+  create(title: string, description: string, releaseDate: Date, minutes: number): Promise<Movie> {
     return new Promise<any>((resolve, reject) => {
       this.http.post<any>(environment.apiUrl + '/movies', {
         title: title,
@@ -60,7 +64,7 @@ export class MoviesService {
       }, {headers: this.headers})
         .toPromise()
         .then(result => {
-          resolve(new Movie(result._id, result.title, result.description, result.releaseDate, result.minutes));
+          resolve(this.createMovie(result));
         })
         .catch(e => reject(e));
     });

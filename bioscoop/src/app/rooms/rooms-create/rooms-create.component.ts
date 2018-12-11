@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class RoomsCreateComponent implements OnInit {
 
-  responseError: string;
+  error: string;
 
   name: string;
 
@@ -19,13 +19,17 @@ export class RoomsCreateComponent implements OnInit {
   }
 
   create() {
+    if(!this.name) {
+      this.error = 'Please fill in a name';
+      return;
+    }
     this.roomsService.create(this.name)
       .then(room => {
         console.log(room);
         this.router.navigateByUrl('rooms/' + room.id);
       })
       .catch(e => {
-        this.responseError = e.error.message;
+        this.error = e.error.message;
         console.error(e);
       });
   }

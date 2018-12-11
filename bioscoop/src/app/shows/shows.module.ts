@@ -7,7 +7,7 @@ import {ShowsListComponent} from './shows-list/shows-list.component';
 import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AppRoutingModule,
     FormsModule,
     NgbModalModule,
-    NgSelectModule
+    SelectDropDownModule
   ],
   declarations: [ShowsCreateComponent, ShowsDetailsComponent, ShowsEditComponent, ShowsListComponent],
 })

@@ -66,8 +66,11 @@ router.post('/', function(req, res) {
 });
 
 router.delete('/:id', function(req, res) {
-    res.locals.room.remove();
-    res.status(200).json({});
+    cinema.Show.find({room: res.locals.room._id})
+        .remove(() => {
+            res.locals.room.remove();
+            res.status(200).json({});
+        })
 });
 
 router.put('/:id', function(req, res) {

@@ -1,3 +1,29 @@
-<p>
-  shows-create works!
-</p>
+<h2>Show editing</h2>
+
+<form>
+
+  <div *ngIf="error">
+    <div class="alert alert-danger">
+      <strong>Oops!</strong> {{error}}
+    </div>
+  </div>
+
+  <label>Movie</label>
+  <div class="input-group mb-3">
+    <ngx-select-dropdown style="width:100%" [multiple]="false" [(value)]="selectedMovies" [config]="{displayKey:'title',search: true}" [options]="movies$ | async"></ngx-select-dropdown>
+  </div>
+
+  <label>Room</label>
+  <div class="input-group mb-3">
+    <ngx-select-dropdown style="width:100%" [multiple]="false" [(value)]="selectedRooms" [config]="{displayKey:'name',search: true}" [options]="rooms$ | async"></ngx-select-dropdown>
+  </div>
+
+  <label>Play time</label>
+  <div class="input-group mb-3">
+    <input type="datetime-local" id="startDateField" name="startDateField" class="form-control" required (change)="onChangeStartDate($event)"/>
+    <input disabled="disabled" type="datetime-local" name="startDateInput" class="form-control" value="{{endDate | date:'yyyy-MM-ddTHH:mm'}}" />
+  </div>
+
+  <button type="button" [routerLink]="'../'" class="btn btn-danger">Cancel</button>
+  <button style="float: right" type="submit" (click)="create()" class="btn btn-success">Create</button>
+</form>

@@ -1,59 +1,34 @@
-<h2>Show details</h2>
+<h2>Show editing</h2>
 
-<ng-template #content let-modal>
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-name" id="exampleModalLongname">Are you sure?</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modals.dismissAll()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      Are you sure you want to delete this show?<br />
-      This cannot be undone.
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modals.dismissAll()">Close</button>
-      <button type="button" class="btn btn-danger" (click)="delete()">I'm sure, delete</button>
+<form *ngIf="(show$ | async) as show">
+
+  <div *ngIf="error">
+    <div class="alert alert-danger">
+      <strong>Oops!</strong> {{error}}
     </div>
   </div>
-</ng-template>
 
-<div *ngIf="show">
-  <form>
-    <div class="form-group">
-      <label for="id">Id</label>
-      <input id="id" disabled="disabled" routerLink="" class="form-control" value="{{show.id}}">
-    </div>
+  <div class="form-group">
+    <label for="id">Id</label>
+    <input id="id" disabled="disabled" routerLink="" class="form-control" value="{{show.id}}">
+  </div>
 
-    <label>Movie</label>
-    <ng-select [items]="people"
-               bindLabel="name"
-               bindValue="id"
-               [(ngModel)]="selectedPersonId2">
-    </ng-select>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" disabled="disabled" value="{{show.movie.title}}">
-      <div class="input-group-append">
-        <button [routerLink]="['/movies', show.movie.id]" class="btn btn-info" type="button">Go to details</button>
-      </div>
-    </div>
+  <label>Movie</label>
+  <div class="input-group mb-3">
+    <ngx-select-dropdown style="width:100%" [multiple]="false" [(value)]="selectedMovies" [config]="{displayKey:'title',search: true}" [options]="movies$ | async"></ngx-select-dropdown>
+  </div>
 
-    <label>Room</label>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" disabled="disabled" value="{{show.room.name}}">
-      <div class="input-group-append">
-        <button [routerLink]="['/rooms', show.room.id]" class="btn btn-info" type="button">Go to details</button>
-      </div>
-    </div>
+  <label>Room</label>
+  <div class="input-group mb-3">
+    <ngx-select-dropdown style="width:100%" [multiple]="false" [(value)]="selectedRooms" [config]="{displayKey:'name',search: true}" [options]="rooms$ | async"></ngx-select-dropdown>
+  </div>
 
-    <label>Play time</label>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" disabled="disabled" value="{{show.start | date:'y-LL-dd HH:mm'}}">
-      <input type="text" class="form-control" disabled="disabled" value="{{show.end | date:'y-LL-dd HH:mm'}}">
-    </div>
+  <label>Play time</label>
+  <div class="input-group mb-3">
+    <input type="datetime-local" id="startDateField" name="startDateField" class="form-control" required (change)="onChangeStartDate($event)" value="{{startDateField | date:'yyyy-MM-ddTHH:mm'}}" />
+    <input disabled="disabled" type="datetime-local" name="startDateInput" class="form-control" value="{{endDate | date:'yyyy-MM-ddTHH:mm'}}" />
+  </div>
 
-    <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
-    <button style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
-  </form>
-</div>
+  <button type="button" [routerLink]="'../'" class="btn btn-danger">Cancel</button>
+  <button style="float: right" type="submit" (click)="edit()" class="btn btn-success">Save</button>
+</form>

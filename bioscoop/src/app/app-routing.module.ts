@@ -25,15 +25,15 @@ const routes: Routes = [
   { path: 'movies', component: MoviesListComponent, canActivate: [NeedAuthGuard] },
   { path: 'movies/create', component: MoviesCreateComponent, canActivate: [NeedAuthGuard] },
   { path: 'movies/:id', component: MoviesDetailsComponent, canActivate: [NeedAuthGuard] },
-  { path: 'movies/:id/edit', component: MoviesEditComponent, canActivate: [NeedAuthGuard] },
+  { path: 'movies/:id/create', component: MoviesEditComponent, canActivate: [NeedAuthGuard] },
   { path: 'rooms', component: RoomsListComponent, canActivate: [NeedAuthGuard] },
   { path: 'rooms/create', component: RoomsCreateComponent, canActivate: [NeedAuthGuard] },
   { path: 'rooms/:id', component: RoomsDetailsComponent, canActivate: [NeedAuthGuard] },
-  { path: 'rooms/:id/edit', component: RoomsEditComponent, canActivate: [NeedAuthGuard] },
+  { path: 'rooms/:id/create', component: RoomsEditComponent, canActivate: [NeedAuthGuard] },
   { path: 'shows', component: ShowsListComponent, canActivate: [NeedAuthGuard] },
   { path: 'shows/create', component: ShowsCreateComponent, canActivate: [NeedAuthGuard] },
   { path: 'shows/:id', component: ShowsDetailsComponent, canActivate: [NeedAuthGuard] },
-  { path: 'shows/:id/edit', component: ShowsEditComponent, canActivate: [NeedAuthGuard] },
+  { path: 'shows/:id/create', component: ShowsEditComponent, canActivate: [NeedAuthGuard] },
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@
     </div>
     <div class="modal-body">
       Are you sure you want to delete {{room.name}}?<br />
-      This cannot be undone.
+      This will also delete all shows in this room.
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="modals.dismissAll()">Close</button>
@@ -34,6 +34,6 @@
     </div>
 
     <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
-    <button style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
+    <button style="float:right" type="button" [routerLink]="'create'" class="btn btn-primary">Edit</button>
   </form>
 </div>

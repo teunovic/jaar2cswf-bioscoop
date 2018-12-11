@@ -39,10 +39,12 @@ export class ShowsService {
     });
   }
 
-  edit(id: string, name: string): Promise<any> {
+  edit(id: string, movieId: string, roomId: string, start: Date): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.http.put<any>(environment.apiUrl + '/shows/' + id, {
-        name: name
+        movie: movieId,
+        room: roomId,
+        start: start
       },{headers: this.headers})
         .toPromise()
         .then(() => resolve())
@@ -50,10 +52,9 @@ export class ShowsService {
     });
   }
 
-  create(name: string, movie: string, room: string, start: string): Promise<Show> {
+  create(movie: string, room: string, start: Date): Promise<Show> {
     return new Promise<any>((resolve, reject) => {
       this.http.post<any>(environment.apiUrl + '/shows', {
-        name: name,
         movie: movie,
         room: room,
         start: start

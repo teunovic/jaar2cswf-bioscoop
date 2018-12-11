@@ -14,7 +14,7 @@ export class RoomsEditComponent implements OnInit {
 
   name: string;
 
-  responseError: string;
+  error: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private roomsService: RoomsService) {
   }
@@ -35,12 +35,16 @@ export class RoomsEditComponent implements OnInit {
   }
 
   edit() {
+    if(!this.name) {
+      this.error = 'Please fill in a name';
+      return;
+    }
     this.roomsService.edit(this.room.id, this.name)
       .then(() => {
         this.router.navigateByUrl('rooms/' + this.room.id);
       })
       .catch(e => {
-        this.responseError = e.error.message;
+        this.error = e.error.message;
         console.error(e);
       });
   }
