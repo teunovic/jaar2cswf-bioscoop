@@ -76,7 +76,7 @@ router.delete('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-    cinema.Movie.findByIdAndUpdate(res.locals.movie._id, req.body, {new: true})
+    cinema.Movie.findByIdAndUpdate(res.locals.movie._id, req.body, {new: true, runValidators: true})
         .then(updatedMovie => {
             res.status(200).json(updatedMovie);
         })

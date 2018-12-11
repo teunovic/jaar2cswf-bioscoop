@@ -20,13 +20,7 @@ export class MoviesService {
     return new Promise<Movie[]>((resolve, reject) => {
       this.http.get<any>(environment.apiUrl + '/movies', {headers: this.headers})
         .toPromise()
-        .then(results => {
-          let movies = [];
-          for(let i = 0; i < results.length; i++) {
-            movies[i] = new Movie(results[i]._id, results[i].title, results[i].description, results[i].releaseDate, results[i].minutes);
-          }
-          resolve(movies);
-        })
+        .then(results => resolve(results.map(movie => new Movie(movie._id, movie.title, movie.description, movie.releaseDate, movie.minutes))))
         .catch(e => reject(e));
     });
   }
@@ -35,9 +29,7 @@ export class MoviesService {
     return new Promise<Movie>((resolve, reject) => {
       this.http.get<any>(environment.apiUrl + '/movies/' + id, {headers: this.headers})
         .toPromise()
-        .then(result => {
-          resolve(new Movie(result._id, result.title, result.description, result.releaseDate, result.minutes));
-        })
+        .then(result => resolve(new Movie(result._id, result.title, result.description, result.releaseDate, result.minutes)))
         .catch(e => reject(e));
     });
   }

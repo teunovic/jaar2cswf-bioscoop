@@ -1,0 +1,15 @@
+<h2>Add a room</h2>
+
+<div *ngIf="responseError">
+  <div class="alert alert-danger">
+    <strong>Oops!</strong> {{responseError}}
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="name">Name</label>
+  <input id="name" class="form-control" [(ngModel)]="name">
+</div>
+
+<button type="button" [routerLink]="'../'" class="btn btn-danger">Cancel</button>
+<button style="float: right" type="button" (click)="create()" class="btn btn-success">Create</button>

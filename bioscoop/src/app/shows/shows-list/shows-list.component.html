@@ -1,0 +1,28 @@
+<h2>All Shows</h2>
+
+<button [routerLink]="'create'" style="float: right;margin-top:-45px" type="button" class="btn btn-success">Add a new show</button>
+<input class="form-control mr-sm-2" type="search" placeholder="Search" [ngModel]="searchQuery" (ngModelChange)="onChange($event)" >
+
+<br />
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" width="25%">Movie</th>
+    <th scope="col" width="15%">Room</th>
+    <th scope="col" width="20%">Start</th>
+    <th scope="col" width="20%">End</th>
+    <th scope="col" width="10%">Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let show of shows">
+    <td>{{show.movie.title}}</td>
+    <td>{{show.room.name}}</td>
+    <td>{{show.start | date:'y-LL-dd HH:mm'}}</td>
+    <td>{{show.end | date:'y-LL-dd HH:mm'}}</td>
+    <td><button type="button" [routerLink]="[show.id]" class="btn btn-info">Details</button></td>
+  </tr>
+  </tbody>
+</table>
+
+

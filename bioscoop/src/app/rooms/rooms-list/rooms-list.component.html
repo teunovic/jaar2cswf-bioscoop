@@ -1,0 +1,22 @@
+<h2>All Rooms</h2>
+
+<button [routerLink]="'create'" style="float: right;margin-top:-45px" type="button" class="btn btn-success">Add a new room</button>
+<input class="form-control mr-sm-2" type="search" placeholder="Search" [ngModel]="searchQuery" (ngModelChange)="onChange($event)" >
+
+<br />
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" width="80%">Name</th>
+    <th scope="col">Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let room of rooms">
+    <td>{{room.name}}</td>
+    <td><button type="button" [routerLink]="[room.id]" class="btn btn-info">Details</button></td>
+  </tr>
+  </tbody>
+</table>
+
+

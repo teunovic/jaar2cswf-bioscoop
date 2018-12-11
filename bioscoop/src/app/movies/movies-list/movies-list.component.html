@@ -1,15 +1,15 @@
 <h2>All Movies</h2>
 
 <button [routerLink]="'create'" style="float: right;margin-top:-45px" type="button" class="btn btn-success">Add a new movie</button>
-<input class="form-control mr-sm-2" type="search" placeholder="Search" [ngModel]="searchTitle" (ngModelChange)="onChange($event)" >
+<input class="form-control mr-sm-2" type="search" placeholder="Search" [ngModel]="searchQuery" (ngModelChange)="onChange($event)" >
 
 <br />
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">Title</th>
-    <th scope="col">Minutes</th>
-    <th scope="col">Details</th>
+    <th scope="col" width="70%">Title</th>
+    <th scope="col" width="10%">Minutes</th>
+    <th scope="col" width="20%">Details</th>
   </tr>
   </thead>
   <tbody>

@@ -113,7 +113,7 @@ router.delete('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-    cinema.Show.findByIdAndUpdate(res.locals.show._id, req.body, {new: true})
+    cinema.Show.findByIdAndUpdate(res.locals.show._id, req.body, {new: true, runValidators: true})
         .then(updatedShow => {
             res.status(200).json(updatedShow);
         })

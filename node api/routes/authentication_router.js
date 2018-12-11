@@ -77,7 +77,6 @@ router.all('*', function(req, res, next) {
                 return;
             }
             res.locals.user = user;
-            console.log(user.username + ' authorized');
             next();
         })
 });

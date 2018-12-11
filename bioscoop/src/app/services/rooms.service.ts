@@ -20,13 +20,7 @@ export class RoomsService {
     return new Promise<Room[]>((resolve, reject) => {
       this.http.get<any>(environment.apiUrl + '/rooms', {headers: this.headers})
         .toPromise()
-        .then(results => {
-          let rooms = [];
-          for(let i = 0; i < results.length; i++) {
-            rooms[i] = new Room(results[i]._id, results[i].name);
-          }
-          resolve(rooms);
-        })
+        .then(results => resolve(results.map(room => new Room(room._id, room.name))))
         .catch(e => reject(e));
     });
   }

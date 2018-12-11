@@ -12,7 +12,7 @@ export class MoviesListComponent implements OnInit {
   private _movies: Movie[];
   public movies: Movie[];
 
-  searchTitle: string;
+  searchQuery: string;
 
   constructor(private moviesService: MoviesService) {
   }

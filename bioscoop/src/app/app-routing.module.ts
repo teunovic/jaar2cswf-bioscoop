@@ -8,18 +8,32 @@ import {MoviesCreateComponent} from './movies/movies-create/movies-create.compon
 import {MoviesDetailsComponent} from './movies/movies-details/movies-details.component';
 import {MoviesListComponent} from './movies/movies-list/movies-list.component';
 import {MoviesEditComponent} from './movies/movies-edit/movies-edit.component';
+import {RoomsListComponent} from './rooms/rooms-list/rooms-list.component';
+import {RoomsCreateComponent} from './rooms/rooms-create/rooms-create.component';
+import {RoomsDetailsComponent} from './rooms/rooms-details/rooms-details.component';
+import {RoomsEditComponent} from './rooms/rooms-edit/rooms-edit.component';
+import {ShowsListComponent} from './shows/shows-list/shows-list.component';
+import {ShowsCreateComponent} from './shows/shows-create/shows-create.component';
+import {ShowsDetailsComponent} from './shows/shows-details/shows-details.component';
+import {ShowsEditComponent} from './shows/shows-edit/shows-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent, pathMatch: 'full' },
-  { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterPageComponent, pathMatch: 'full' },
+  { path: 'logout', component: LogoutComponent, canActivate: [NeedAuthGuard] },
   { path: 'movies', component: MoviesListComponent, canActivate: [NeedAuthGuard] },
   { path: 'movies/create', component: MoviesCreateComponent, canActivate: [NeedAuthGuard] },
   { path: 'movies/:id', component: MoviesDetailsComponent, canActivate: [NeedAuthGuard] },
   { path: 'movies/:id/edit', component: MoviesEditComponent, canActivate: [NeedAuthGuard] },
-  { path: 'rooms', component: MoviesListComponent, canActivate: [NeedAuthGuard] },
-  { path: 'shows', component: MoviesListComponent, canActivate: [NeedAuthGuard] },
+  { path: 'rooms', component: RoomsListComponent, canActivate: [NeedAuthGuard] },
+  { path: 'rooms/create', component: RoomsCreateComponent, canActivate: [NeedAuthGuard] },
+  { path: 'rooms/:id', component: RoomsDetailsComponent, canActivate: [NeedAuthGuard] },
+  { path: 'rooms/:id/edit', component: RoomsEditComponent, canActivate: [NeedAuthGuard] },
+  { path: 'shows', component: ShowsListComponent, canActivate: [NeedAuthGuard] },
+  { path: 'shows/create', component: ShowsCreateComponent, canActivate: [NeedAuthGuard] },
+  { path: 'shows/:id', component: ShowsDetailsComponent, canActivate: [NeedAuthGuard] },
+  { path: 'shows/:id/edit', component: ShowsEditComponent, canActivate: [NeedAuthGuard] },
 ];
 
 @NgModule({

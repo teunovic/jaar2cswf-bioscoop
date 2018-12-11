@@ -1,0 +1,56 @@
+<h2>Show details</h2>
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-name" id="exampleModalLongname">Are you sure?</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modals.dismissAll()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Are you sure you want to delete this show?<br />
+      This cannot be undone.
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modals.dismissAll()">Close</button>
+      <button type="button" class="btn btn-danger" (click)="delete()">I'm sure, delete</button>
+    </div>
+  </div>
+</ng-template>
+
+<button data-toggle="modal" (click)="openDeleteDialog(content)" data-target="#exampleModal" style="float: right;margin-top:-45px" type="button" class="btn btn-danger">Remove this show</button>
+
+<div *ngIf="show">
+  <form>
+    <div class="form-group">
+      <label for="id">Id</label>
+      <input id="id" disabled="disabled" routerLink="" class="form-control" value="{{show.id}}">
+    </div>
+
+    <label>Movie</label>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" disabled="disabled" value="{{show.movie.title}}">
+      <div class="input-group-append">
+        <button [routerLink]="['/movies', show.movie.id]" class="btn btn-info" type="button">Go to details</button>
+      </div>
+    </div>
+
+    <label>Room</label>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" disabled="disabled" value="{{show.room.name}}">
+      <div class="input-group-append">
+        <button [routerLink]="['/rooms', show.room.id]" class="btn btn-info" type="button">Go to details</button>
+      </div>
+    </div>
+
+    <label>Play time</label>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" disabled="disabled" value="{{show.start | date:'y-LL-dd HH:mm'}}">
+      <input type="text" class="form-control" disabled="disabled" value="{{show.end | date:'y-LL-dd HH:mm'}}">
+    </div>
+
+    <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
+    <button style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
+  </form>
+</div>

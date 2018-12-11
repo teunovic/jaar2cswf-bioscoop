@@ -6,11 +6,13 @@ const Schema = mongoose.Schema;
 const MovieSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        minlength: 2
     },
     description: {
         type: String,
-        required: true
+        required: true,
+        minlength: 2
     },
     releaseDate: {
         type: Date,
@@ -18,14 +20,17 @@ const MovieSchema = new Schema({
     },
     minutes: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max: 1024
     }
 });
 
 const RoomSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        minlength: 2
     }
 });
 
@@ -64,6 +69,12 @@ const ShowSchema = new Schema({
     }
 });
 
+ShowSchema.pre('find', function() {
+    this.populate(['room', 'movie']);
+});
+ShowSchema.pre('findOne', function() {
+    this.populate(['room', 'movie']);
+});
 
 const Movie = mongoose.model('Movie', MovieSchema);
 const Room = mongoose.model('Room', RoomSchema);

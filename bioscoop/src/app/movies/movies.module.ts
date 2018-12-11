@@ -17,4 +17,5 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [MoviesListComponent, MoviesDetailsComponent, MoviesEditComponent, MoviesCreateComponent]
 })
-export class MoviesModule { }
+export class MoviesModule {
+}
