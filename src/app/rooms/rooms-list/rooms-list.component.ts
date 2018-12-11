@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Room} from '../../model/Room';
 import {RoomsService} from '../../services/rooms.service';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-rooms-list',
@@ -14,7 +15,7 @@ export class RoomsListComponent implements OnInit {
 
   searchQuery: string;
 
-  constructor(private roomsService: RoomsService) {
+  constructor(public userService: UserService, private roomsService: RoomsService) {
   }
 
   ngOnInit() {

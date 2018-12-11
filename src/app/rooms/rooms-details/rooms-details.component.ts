@@ -3,6 +3,7 @@ import {Room} from '../../model/Room';
 import {RoomsService} from '../../services/rooms.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-rooms-details',
@@ -13,7 +14,7 @@ export class RoomsDetailsComponent implements OnInit {
 
   public room: Room;
 
-  constructor(private route: ActivatedRoute, private router: Router, private roomsService: RoomsService, public modals: NgbModal) { }
+  constructor(public userService: UserService, private route: ActivatedRoute, private router: Router, private roomsService: RoomsService, public modals: NgbModal) { }
 
   ngOnInit() {
     this.route.params

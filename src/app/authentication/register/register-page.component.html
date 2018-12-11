@@ -1,9 +1,9 @@
 <div class="card mt-5" style="margin:auto;width: 600px;">
   <div class="card-body">
     <h5 class="card-title">Register</h5>
-    <div *ngIf="responseError">
+    <div *ngIf="error">
       <div class="alert alert-danger">
-        <strong>Oops!</strong> {{responseError}}
+        <strong>Oops!</strong> {{error}}
       </div>
     </div>
     <div class="form-group">

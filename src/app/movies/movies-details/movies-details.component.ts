@@ -3,6 +3,7 @@ import {Movie} from '../../model/Movie';
 import {MoviesService} from '../../services/movies.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-movies-details',
@@ -13,7 +14,7 @@ export class MoviesDetailsComponent implements OnInit {
 
   public movie: Movie;
 
-  constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService, public modals: NgbModal) { }
+  constructor(public userService: UserService, private route: ActivatedRoute, private router: Router, private moviesService: MoviesService, public modals: NgbModal) { }
 
   ngOnInit() {
     this.route.params

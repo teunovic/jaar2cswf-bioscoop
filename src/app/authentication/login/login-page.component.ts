@@ -17,7 +17,7 @@ export class LoginPageComponent {
 
   constructor(private auth: AuthService, private userService: UserService, private router: Router) {
     if(userService.getUser()) {
-      router.navigateByUrl('/movies');
+      router.navigateByUrl('/dashboard');
     }
   }
 
@@ -25,7 +25,7 @@ export class LoginPageComponent {
     this.auth.login(this.username, this.password)
       .subscribe(user => {
         console.log('welkom, ' + user.username);
-        this.router.navigateByUrl('/movies');
+        this.router.navigateByUrl('/dashboard');
       },
       err => {
         console.log(err);

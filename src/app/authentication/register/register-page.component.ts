@@ -13,22 +13,30 @@ export class RegisterPageComponent {
   username: string;
   password: string;
 
-  responseError: string;
+  error: string;
 
   constructor(private auth: AuthService, private userService: UserService, private router: Router) {
     if(userService.getUser()) {
-      router.navigateByUrl('/movies');
+      router.navigateByUrl('/dashboard');
     }
   }
 
   tryRegister() {
+    if(!/^([a-zA-Z0-9-_]{2,32})$/.test(this.username)) {
+      this.error = 'Username must be alphanumeric, and between 2 and 32 characters';
+      return;
+    }
+    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.password)) {
+      this.error = 'Password must be at least 8 characters, and contain at least 1 letter and 1 number';
+      return;
+    }
     this.auth.register(this.username, this.password)
       .subscribe(user => {
-          this.router.navigateByUrl('/movies');
+          this.router.navigateByUrl('/dashboard');
         },
         err => {
           console.log(err);
-          this.responseError = err.error.message;
+          this.error = err.error.message;
         });
 
   }

@@ -1,6 +1,7 @@
 <h2>All Movies</h2>
 
-<button [routerLink]="'create'" style="float: right;margin-top:-45px" type="button" class="btn btn-success">Add a new movie</button>
+<button *ngIf="userService.getUser().isAdmin" [routerLink]="'create'" style="float: right;margin-top:-45px" type="button" class="btn btn-success">Add a new movie</button>
+<br />
 <input class="form-control mr-sm-2" type="search" placeholder="Search" [ngModel]="searchQuery" (ngModelChange)="onChange($event)" >
 
 <br />

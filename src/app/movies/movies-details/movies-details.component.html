@@ -1,6 +1,6 @@
 <h2>Movie details</h2>
 
-<ng-template #content let-modal>
+<ng-template *ngIf="userService.getUser().isAdmin" #content let-modal>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
@@ -19,7 +19,7 @@
   </div>
 </ng-template>
 
-<button data-toggle="modal" (click)="openDeleteDialog(content)" data-target="#exampleModal" style="float: right;margin-top:-45px" type="button" class="btn btn-danger">Remove this movie</button>
+<button *ngIf="userService.getUser().isAdmin" data-toggle="modal" (click)="openDeleteDialog(content)" data-target="#exampleModal" style="float: right;margin-top:-45px" type="button" class="btn btn-danger">Remove this movie</button>
 
 <div *ngIf="movie">
   <form>
@@ -40,7 +40,7 @@
 
     <div class="form-group">
       <label for="releaseDate">Release date</label>
-      <input id="releaseDate" disabled="disabled" class="form-control" value="{{movie.releaseDate | date:'dd-MM-yyyy HH:mm'}}">
+      <input id="releaseDate" disabled="disabled" class="form-control" value="{{movie.releaseDate | date:'dd-MM-yyyy'}}">
     </div>
 
     <div class="form-group">
@@ -49,6 +49,6 @@
     </div>
 
     <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
-    <button style="float:right" type="button" [routerLink]="'create'" class="btn btn-primary">Edit</button>
+    <button *ngIf="userService.getUser().isAdmin" style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
   </form>
 </div>

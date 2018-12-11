@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Show} from '../../model/Show';
 import {ShowsService} from '../../services/shows.service';
+import {Movie} from '../../model/Movie';
+import {Room} from '../../model/Room';
+import {MoviesService} from '../../services/movies.service';
+import {RoomsService} from '../../services/rooms.service';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-shows-list',
@@ -9,35 +14,32 @@ import {ShowsService} from '../../services/shows.service';
 })
 export class ShowsListComponent implements OnInit {
 
-  private _shows: Show[];
-  public shows: Show[];
+  shows$: Promise<Show[]>;
 
-  searchQuery: string;
+  movies$: Promise<Movie[]>;
+  rooms$: Promise<Room[]>;
 
-  constructor(private showsService: ShowsService) {
+  selectedMovies: Movie[];
+  selectedRooms: Room[];
+
+  constructor(public userService: UserService, private showsService: ShowsService, private moviesService: MoviesService, private roomsService: RoomsService) {
   }
 
   ngOnInit() {
-    this.showsService.fetchAll()
-      .then(shows => {
-        console.log(shows);
-        this._shows = shows;
-        this.shows = shows;
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    this.movies$ = this.moviesService.fetchAll();
+    this.rooms$ = this.roomsService.fetchAll();
+    this.shows$ = this.showsService.fetchAll();
   }
 
-  onChange(newValue) {
-    console.log(newValue);
-    if (!newValue) {
-      this.shows = this._shows;
-      return;
-    }
-    newValue = newValue.toLowerCase();
-    this.shows = this._shows.filter(s => s.movie.title.toLowerCase().includes(newValue) || s.room.name.toLowerCase().includes(newValue));
+  onChooseMovies(movies) {
+    // this.shows = this._shows.filter(s => s.movie.title.toLowerCase().includes(newValue) || s.room.name.toLowerCase().includes(newValue));
   }
+
+  onChooseRooms(val) {
+
+  }
+
+
 
 
 }

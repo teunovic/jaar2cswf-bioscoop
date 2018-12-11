@@ -8,6 +8,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
+import {ShowFilterPipe} from '../pipes/show-filter.pipe';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown'
     NgbModalModule,
     SelectDropDownModule
   ],
-  declarations: [ShowsCreateComponent, ShowsDetailsComponent, ShowsEditComponent, ShowsListComponent],
+  declarations: [ShowsCreateComponent, ShowsDetailsComponent, ShowsEditComponent, ShowsListComponent, ShowFilterPipe],
 })
 export class ShowsModule {
 }

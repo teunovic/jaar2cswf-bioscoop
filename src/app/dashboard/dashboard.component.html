@@ -1,0 +1,10 @@
+
+<div class="card mt-5" style="margin:auto;max-width:600px">
+  <div class="card-body">
+    <h2>Welcome to the bioscoop-panel, {{userService.getUser().username}}</h2>
+
+    <p *ngIf="userService.getUser().isAdmin">You are an admin.</p>
+    <p>The bioscoop-panel has three elements, Movies, Rooms and Shows.</p>
+    <p>A show has one movie, one room, and a start date and end date. When a movie or room is deleted, all shows with that movie or room will be deleted as well.</p>
+  </div>
+</div>

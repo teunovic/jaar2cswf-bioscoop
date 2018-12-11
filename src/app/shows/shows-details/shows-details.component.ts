@@ -3,6 +3,7 @@ import {Show} from '../../model/Show';
 import {ShowsService} from '../../services/shows.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-shows-details',
@@ -13,7 +14,7 @@ export class ShowsDetailsComponent implements OnInit {
 
   public show: Show;
 
-  constructor(private route: ActivatedRoute, private router: Router, private showsService: ShowsService, public modals: NgbModal) { }
+  constructor(public userService: UserService, private route: ActivatedRoute, private router: Router, private showsService: ShowsService, public modals: NgbModal) { }
 
   ngOnInit() {
     this.route.params

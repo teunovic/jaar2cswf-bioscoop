@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Movie} from '../../model/Movie';
 import {MoviesService} from '../../services/movies.service';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -14,7 +15,7 @@ export class MoviesListComponent implements OnInit {
 
   searchQuery: string;
 
-  constructor(private moviesService: MoviesService) {
+  constructor(public userService: UserService, private moviesService: MoviesService) {
   }
 
   ngOnInit() {

@@ -9,11 +9,14 @@ import {MoviesModule} from './movies/movies.module';
 import {AppRoutingModule} from './app-routing.module';
 import {RoomsModule} from './rooms/rooms.module';
 import {ShowsModule} from './shows/shows.module';
+import {NeedAdminGuard} from './authentication/admin.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import {ShowsModule} from './shows/shows.module';
     AppRoutingModule
   ],
   providers: [
-    NeedAuthGuard
+    NeedAuthGuard,
+    NeedAdminGuard
   ],
   bootstrap: [AppComponent],
   exports: [
