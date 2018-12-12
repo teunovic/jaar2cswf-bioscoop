@@ -26,7 +26,7 @@ export class RegisterPageComponent {
       this.error = 'Username must be alphanumeric, and between 2 and 32 characters';
       return;
     }
-    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.password)) {
+    if(!(/[a-zA-Z]+/.test(this.password) && /[0-9]+/.test(this.password) && this.password.length >= 8)) {
       this.error = 'Password must be at least 8 characters, and contain at least 1 letter and 1 number';
       return;
     }
