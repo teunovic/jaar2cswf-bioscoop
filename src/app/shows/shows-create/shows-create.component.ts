@@ -36,6 +36,12 @@ export class ShowsCreateComponent implements OnInit {
     this.selectedRooms = [];
   }
 
+  onChangeMovie() {
+    if(this.selectedMovies.length && this.startDateVal) {
+      this.endDate = moment(this.startDateVal).add(this.selectedMovies[0].minutes, 'm').toDate();
+    }
+  }
+
   onChangeStartDate(val) {
     let chosenStart = moment(val.target.value);
     console.log(chosenStart);

@@ -10,7 +10,7 @@
 
   <label>Movie</label>
   <div class="input-group mb-3">
-    <ngx-select-dropdown style="width:100%" [multiple]="false" [(value)]="selectedMovies" [config]="{displayKey:'title',search: true}" [options]="movies$ | async"></ngx-select-dropdown>
+    <ngx-select-dropdown style="width:100%" [multiple]="false" [(value)]="selectedMovies" [config]="{displayKey:'title',search: true}" (valueChange)="onChangeMovie()" [options]="movies$ | async"></ngx-select-dropdown>
   </div>
 
   <label>Room</label>
