@@ -31,15 +31,4 @@ export class ShowsListComponent implements OnInit {
     this.shows$ = this.showsService.fetchAll();
   }
 
-  onChooseMovies(movies) {
-    // this.shows = this._shows.filter(s => s.movie.title.toLowerCase().includes(newValue) || s.room.name.toLowerCase().includes(newValue));
-  }
-
-  onChooseRooms(val) {
-
-  }
-
-
-
-
 }

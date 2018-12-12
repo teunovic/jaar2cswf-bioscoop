@@ -33,7 +33,7 @@
       <input id="name" disabled="disabled" class="form-control" value="{{room.name}}">
     </div>
 
-    <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
+    <button type="button" [routerLink]="'../'" class="btn btn-info">Rooms overview</button>
     <button *ngIf="userService.getUser().isAdmin" style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
   </form>
 </div>
