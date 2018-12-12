@@ -40,7 +40,7 @@ export class ShowsDetailsComponent implements OnInit {
 
   openDeleteDialog(content) {
     this.modals.open(content).result.then((result) => {
-      console.log('yeet')
+      //console.log('yeet')
     }, (reason) => {
       console.log(reason);
     });

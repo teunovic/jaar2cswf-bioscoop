@@ -24,7 +24,6 @@ export class LoginPageComponent {
   tryLogin() {
     this.auth.login(this.username, this.password)
       .subscribe(user => {
-        console.log('welkom, ' + user.username);
         this.router.navigateByUrl('/dashboard');
       },
       err => {

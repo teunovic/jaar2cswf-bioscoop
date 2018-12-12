@@ -13,7 +13,6 @@ export class RoomsService {
 
   constructor(private http: HttpClient, private userService: UserService) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.userService.getUser().token });
-    console.log('token = ' + this.userService.getUser().token);
   }
 
   fetchAll(): Promise<Room[]> {

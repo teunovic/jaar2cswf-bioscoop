@@ -21,7 +21,6 @@ export class RoomsListComponent implements OnInit {
   ngOnInit() {
     this.roomsService.fetchAll()
       .then(rooms => {
-        console.log(rooms);
         this._rooms = rooms;
         this.rooms = rooms;
       })

@@ -21,7 +21,6 @@ export class MoviesListComponent implements OnInit {
   ngOnInit() {
     this.moviesService.fetchAll()
       .then(movies => {
-        console.log(movies);
         this._movies = movies;
         this.movies = movies;
       })

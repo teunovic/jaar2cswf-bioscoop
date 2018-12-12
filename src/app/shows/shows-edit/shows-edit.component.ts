@@ -48,9 +48,8 @@ export class ShowsEditComponent implements OnInit {
   }
 
   onChangeMovie() {
-    // Recalculate end time
-    if(this.startDateVal) {
-      this.onChangeStartDate(this.startDateField);
+    if(this.selectedMovies.length && this.startDateVal) {
+      this.endDate = moment(this.startDateVal).add(this.selectedMovies[0].minutes, 'm').toDate();
     }
   }
 
