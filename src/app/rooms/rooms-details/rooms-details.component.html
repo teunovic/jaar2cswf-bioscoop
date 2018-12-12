@@ -34,6 +34,6 @@
     </div>
 
     <button type="button" [routerLink]="'../'" class="btn btn-info">Go back</button>
-    <button style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
+    <button *ngIf="userService.getUser().isAdmin" style="float:right" type="button" [routerLink]="'edit'" class="btn btn-primary">Edit</button>
   </form>
 </div>
