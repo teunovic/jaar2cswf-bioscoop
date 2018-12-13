@@ -2,8 +2,8 @@
 
 <button *ngIf="userService.getUser().isAdmin" [routerLink]="'create'" style="float: right;margin-top:-45px" type="button" class="btn btn-success">Add a new show</button>
 <br />
-<ngx-select-dropdown [multiple]="true" [(value)]="selectedMovies" (valueChange)="onChooseMovies($event)" [config]="{placeholder: 'Select movies...', displayKey:'title',search: true}" [options]="movies$ | async" style="float: left; width:50%;"></ngx-select-dropdown>
-<ngx-select-dropdown [multiple]="true" [(value)]="selectedRooms" (valueChange)="onChooseRooms($event)" [config]="{placeholder: 'Select rooms...', displayKey:'name',search: true}" [options]="rooms$ | async" style="float: right; width:50%;"></ngx-select-dropdown>
+<ngx-select-dropdown [multiple]="true" [(value)]="selectedMovies" [config]="{placeholder: 'Select movies...', displayKey:'title',search: true}" [options]="movies$ | async" style="float: left; width:50%;"></ngx-select-dropdown>
+<ngx-select-dropdown [multiple]="true" [(value)]="selectedRooms" [config]="{placeholder: 'Select rooms...', displayKey:'name',search: true}" [options]="rooms$ | async" style="float: right; width:50%;"></ngx-select-dropdown>
 <br />
 <br />
 <table class="table">
